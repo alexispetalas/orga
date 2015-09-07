@@ -1,0 +1,6 @@
+compile:
+	make
+run: 	
+	make run
+clean:  
+	make clean
