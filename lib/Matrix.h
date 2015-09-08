@@ -16,5 +16,6 @@
 
 
 int doX(char *filename);
+void parseline(char* linea, int len);
 
 #endif
