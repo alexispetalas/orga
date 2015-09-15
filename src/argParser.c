@@ -1,19 +1,17 @@
 #include "argParser.h"
 
-const char* nombre_programa;
-
 int showMenuHelp()
 {
-	printf("%s\n", "Usage:");
-    printf("  %s -h\n", nombre_programa);
-    printf("  %s -V\n", nombre_programa);
-    printf("  %s  < in_file > out_file\n", nombre_programa);
-    printf("%s\n", "Options:");
+    printf("Usage:\n");
+    printf("  ./tp0 -h\n");
+    printf("  ./tp0 -V\n");
+    printf("  ./tp0  < in_file > out_file\n");
+    printf("Options:\n");
     printf("  -V, --version\tPrint version and quit.\n");
     printf("  -h, --help\tPrint this information and quit.\n");
-    printf("%s\n", "Examples:");
-    printf("  %s < in.txt > out.txt\n", nombre_programa);
-    printf("  cat in.txt | %s > out.txt\n", nombre_programa);
+    printf("Examples:\n");
+    printf("  ./tp0 < in.txt > out.txt\n");
+    printf("  cat in.txt | ./tp0 > out.txt\n");
     return EXITO;
 }
 
@@ -33,56 +31,39 @@ int showMenuVersion()
 }
 
 
-T_ProgramSettings readOptions (int argc, char** argv, const char* op_cortas, const struct option op_largas[]) {
+int readOptions (int argc, char** argv, const char* op_cortas, const struct option op_largas[]) {
 
-	T_ProgramSettings settings;
-	settings.paramsInCount = 0;
 	int siguiente_opcion = 0;
+	int result = ERROR;
 
-	while (1) {
-		/* Llamamos a la función getopt */
-		siguiente_opcion = getopt_long(argc, argv, op_cortas, op_largas, NULL);
+	siguiente_opcion = getopt_long(argc, argv, op_cortas, op_largas, NULL);
 
-		if (siguiente_opcion == -1) {
-			break; /* No hay más opciones. Rompemos el bucle */
-		}
-
-		switch (siguiente_opcion) {
-			case 'h' : /* -h o --help */
-				showMenuHelp();
-				exit(EXIT_SUCCESS);
-
-			case 'V' : /* -v o --version */
-				showMenuVersion();
-				exit(1);
-
-			case '?' : /* opción no valida */
-				showMenuHelp(); /* código de salida 1 */
-				exit(1);
-
-			case -1 : /* No hay más opciones */
-				break;
-
-			default : /* Algo más? No esperado. Abortamos */
-				abort();
-		}
+	switch (siguiente_opcion) {
+		case 'h' : /* -h o --help */
+			showMenuHelp();
+			result = EXITO_HELP;
+			break;
+		case 'V' : /* -V o --version */
+			showMenuVersion();
+			result = EXITO_HELP;
+			break;
+		case '?' : /* opción no valida */
+			showMenuHelp();
+			result = EXITO_HELP;
+			break;
+		default : /* Algo más? No esperado. Abortamos */
+			result = EXITO;
 	}
 
-	if (optind < argc) {
-		settings.paramsInCount = argc - optind;
-		settings.paramsIn = &argv[optind];
-	}
-
-	return settings;
+	return result;
 }
 
 
 
-T_ProgramSettings parseArguments (int argc, char** argv) {
-
-	if(argc == 1){
-		showMenuHelp();
-	}
+int parseArguments (int argc, char** argv) {
+  
+	int result = ERROR;
+		
 	/* Una cadena que lista las opciones cortas válidas */
 	const char* op_cortas = "hV" ;
 
@@ -93,9 +74,11 @@ T_ProgramSettings parseArguments (int argc, char** argv) {
 		{ NULL,           0,  NULL,   0  }
 	};
 
-	nombre_programa = argv[0];
-
-	T_ProgramSettings settings = readOptions(argc, argv, op_cortas, op_largas);
-
-	return settings;
+	result = readOptions(argc, argv, op_cortas, op_largas);
+	
+	if(result == ERROR){
+	    showMenuHelp();
+	}
+	
+	return result;
 }

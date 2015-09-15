@@ -13,9 +13,16 @@
 #define ERROR_AL_ABRIR_ARCHIVO -2
 #define MAX_BUFFER_READ 400
 #define EXITO 0
+#define ERROR 1
 
+typedef struct {
+	int rows;
+	int columns;
+	float** values;
+} T_Matrix;
 
 int doX(char *filename);
-void parseline(char* linea, int len);
+int leerEntradaEstandard();
+int parseline(char* linea, int len);
 
 #endif

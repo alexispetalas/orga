@@ -1,8 +1,10 @@
 DEPS = \
        src/argParser.h \
+       src/Matrix.h \
        src/tp0.h
 
 OBJ = build/obj/argParser.o \
+      build/obj/Matrix.o \
       build/obj/tp0.o
 
 VIRTUAL = gxemul-6620-20070927
@@ -19,6 +21,9 @@ tp0: $(OBJ)
 build/obj/argParser.o: src/argParser.c $(DEPS)
 	$(CC) -c -o $@ src/argParser.c $(CFLAGS)
 
+build/obj/Matrix.o: src/Matrix.c $(DEPS)
+	$(CC) -c -o $@ src/Matrix.c $(CFLAGS)
+	
 build/obj/tp0.o: src/tp0.c $(DEPS)
 	$(CC) -c -o $@ src/tp0.c $(CFLAGS)
 

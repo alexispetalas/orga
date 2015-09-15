@@ -10,12 +10,9 @@
 #define MAX 2056
 #define MAX_PARAMS_IN 255
 #define EXITO 0
+#define EXITO_HELP 2
+#define ERROR 1
 
-typedef struct {
-	int paramsInCount;
-	char** paramsIn;
-} T_ProgramSettings;
-
-T_ProgramSettings parseArguments (int argc, char** argv) ;
+int parseArguments (int argc, char** argv) ;
 
 #endif /* ARGPARSER_H_ */

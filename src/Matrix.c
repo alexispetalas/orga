@@ -1,35 +1,42 @@
 #include "Matrix.h"
 
-int doX(char *filename)
+#define BUF_SIZE 1024
+
+
+int leerEntradaEstandard()
 {
-  char * line = NULL;
-  size_t len = 0;
-  ssize_t read;
-  FILE *file;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-      if (strlen(filename) >  0)
-      {
-      	file = fopen(filename, "r");
-      	if (file == NULL)
-    		{
-    			fprintf(stderr, "Error al abrir archivo de entrada %s \n", filename);
-    			return ERROR_AL_ABRIR_ARCHIVO;
-    		}
+    while ((read = getline(&line, &len, stdin)) != -1) {
+	if (parseline(line, read) == ERROR)
+	  break;
+    }
 
-        while ((read = getline(&line, &len, file)) != -1) {
-            parseline(line, read);
-        }
+    if (line)
+	free(line);
 
-        fclose(file);
-        if (line)
-            free(line);
-      }
-
-	return EXITO;
+    return EXITO;
 }
 
-void parseline(char* linea, int len){
-  if (len > 0) {
+char* serializeMatrix(T_Matrix* m ){
+    char* matrix_str = NULL;
+    
+    return matrix_str;
+}
+
+T_Matrix* deserializeMatrix(char* m){
+  
+  T_Matrix* matrix = NULL;
+  
+  return matrix;
+  
+}
+
+int parseline(char* linea, int len){
+  int result = ERROR;
+  if (len > 1) {
     int dimension1 = linea[0] - '0';
     int dimension2 = linea[2] - '0';
     printf("dimensiones: %d x %d \n" ,dimension1,dimension2);
@@ -42,5 +49,7 @@ void parseline(char* linea, int len){
        printf("%4.8f\n" ,atof(token));
        token = strtok(NULL, " ");
     }
+    result = EXITO;
   }
+  return result;
 }
