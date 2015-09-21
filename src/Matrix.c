@@ -47,13 +47,13 @@ int leerEntradaEstandard()
 
 void imprimirMatriz(T_Matrix* matrix){
 	int row, columns;
-	printf("Matriz %dx%d\n", matrix->rows, matrix->columns);
+  printf("%dx%d ", matrix->rows, matrix->columns);
 	for (row=0; row<matrix->rows; row++)
 	{
 	    for(columns=0; columns<matrix->columns; columns++)
-	         printf("%f     ", matrix->values[row][columns]);
-	    printf("\n");
-	 }
+	         printf("%f ", matrix->values[row][columns]);
+	}
+  printf("\n");
 }
 
 void liberarMatriz(T_Matrix* matrix){
