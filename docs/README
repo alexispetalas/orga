@@ -1,0 +1,19 @@
+Pasos para correr en la virtual:
+$ make virtual-start
+login: root
+pass: orga6620
+
+Ctrl+Shift+V o copy-paste de la linea "ssh -f -N -R 2222:127.0.0.1:22 giovanni@172.20.0.1"
+
+abrir otra consola y hacer un:
+$ make virtual-deploy (despliega los archivos importarntes a la virtual)
+
+ahora volvemos a la consolita anterior y entran en deploy
+$ cd deploy/
+$ make build
+Ahi se les compila todo en MIPS... 
+
+el ejecutable se genera en ~/deploy/build/tp0
+los archivos para correr están bajo la carpeta de data/
+
+Ejemplo de corrida: ~/deploy/$ build/tp0 < data/in1.txt
