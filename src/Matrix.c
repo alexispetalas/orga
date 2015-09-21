@@ -19,14 +19,19 @@ int leerEntradaEstandard()
 			if (num_linea%2 == 0)		/** Pares **/
 			{
 				m1 = deserializeMatrix(line, num_linea);
-				if (m1 == NULL) 	/** Algun problema surgio al deserealizar la matriz **/
-					break;
+				if (m1 == NULL) {
+          /** Algun problema surgio al deserealizar la matriz **/
+          fprintf(stderr, "Ocurrio un error al procesar una las lineas. Verique el formato y la cantidad de matrices en el archivo.\n");
+  				break;
+        }
 			}
 			else						/** Impares **/
 			{
 				m2 = deserializeMatrix(line, num_linea);
-				if (m2 == NULL) 	/** Algun problema surgio al deserealizar la matriz **/
-					break;
+				if (m2 == NULL){
+          fprintf(stderr, "Ocurrio un error al procesar una las lineas. Verique el formato y la cantidad de matrices en el archivo.\n");
+          break;
+        } 	/** Algun problema surgio al deserealizar la matriz **/
 				else{
 					m_resultado = procesarMatrices(m1, m2);
 
