@@ -1,23 +1,21 @@
 #include "Matrix.h"
 
-#define BUF_SIZE 1024
-
+#define BUF_SIZE 255
 
 int leerEntradaEstandard()
 {
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
+
+    char line[BUF_SIZE];
     int num_linea = 0;
 
     T_Matrix* m1 = NULL;
     T_Matrix* m2 = NULL;
     T_Matrix* m_resultado = NULL;
     /** Lectura de stdin para obtener las matrices linea por linea **/
-    while ((read = getline(&line, &len, stdin)) != -1) {
 
-    	if(read > 1){
+    while((fgets(line,BUF_SIZE,stdin)) != NULL){
 
+    	if(strlen(line) > 2){
 			if (num_linea%2 == 0)		/** Pares **/
 			{
 				m1 = deserializeMatrix(line, num_linea);
@@ -43,9 +41,6 @@ int leerEntradaEstandard()
 			++num_linea;
     	}
 	}
-
-    if (line)
-	free(line);
 
     return EXITO;
 }
