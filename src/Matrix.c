@@ -29,6 +29,7 @@ int leerEntradaEstandard()
 			{
 				m2 = deserializeMatrix(line, num_linea);
 				if (m2 == NULL){
+				  liberarMatriz(m1);
           fprintf(stderr, "Ocurrio un error al procesar una las lineas. Verique el formato y la cantidad de matrices en el archivo.\n");
           break;
         } 	/** Algun problema surgio al deserealizar la matriz **/
@@ -136,13 +137,13 @@ T_Matrix* deserializeMatrix(const char* linea, int num_linea){
 
 T_Matrix* nuevaMatriz(int rows, int columns){
 
-	T_Matrix* matrix = (T_Matrix*) malloc(sizeof(T_Matrix));
+	T_Matrix* matrix = (T_Matrix*) malloc(sizeof (T_Matrix) );
 
 	matrix->rows = rows;
 	matrix->columns = columns;
 
 	/** Aloco espacio para la matriz **/
-	matrix->values = (float**) malloc (sizeof(float)*matrix->rows);
+	matrix->values = (float**) malloc (sizeof(float*)*matrix->rows);
 	int i = 0;
 	for(; i < matrix->rows; ++i){
 		matrix->values[i] = (float*) malloc (sizeof(float)*matrix->columns);
