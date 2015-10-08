@@ -52,25 +52,18 @@ int leerEntradaEstandard()
 }
 
 void imprimirMatriz(T_Matrix* matrix){
-	int row, columns;
+	int pos;
   printf("%dx%d ", matrix->rows, matrix->columns);
-	for (row=0; row<matrix->rows; row++)
+	for (pos=0; pos < (matrix->rows*matrix->columns); pos++)
 	{
-	    for(columns=0; columns<matrix->columns; columns++)
-	         printf("%f ", matrix->values[row][columns]);
+	    printf("%f ", matrix->values[pos]);
 	}
   printf("\n");
 }
 
 void liberarMatriz(T_Matrix* matrix){
 
-	int row;
-
-	for( row=0; row<matrix->rows; row++ ) {
-	    free( matrix->values[row] );
-	}
 	free( matrix->values );
-
 	free(matrix);
 	matrix = NULL;
 }
@@ -108,10 +101,11 @@ T_Matrix* deserializeMatrix(const char* linea, int num_linea){
     char *token;
     token = strtok(valores, " ");
 
+    
     int f=0, c=0;
     while( (token != NULL) && (f < rows ) )
     {
-    	matrix->values[f][c] = atof(token);
+    	matrix->values[(f*columns)+c] = atof(token);
     	token = strtok(NULL, " ");
     	if(f < rows){
     		c++;
@@ -121,7 +115,7 @@ T_Matrix* deserializeMatrix(const char* linea, int num_linea){
     		}
     	}
     }
-
+    
     /** Matriz incompleta **/
     if(f != rows){
     	fprintf(stderr, "Faltan valores en la matriz de %dx%d de la linea %d.\n", matrix->rows, matrix->columns, num_linea );
@@ -143,11 +137,7 @@ T_Matrix* nuevaMatriz(int rows, int columns){
 	matrix->columns = columns;
 
 	/** Aloco espacio para la matriz **/
-	matrix->values = (float**) malloc (sizeof(float*)*matrix->rows);
-	int i = 0;
-	for(; i < matrix->rows; ++i){
-		matrix->values[i] = (float*) malloc (sizeof(float)*matrix->columns);
-	}
+	matrix->values = (float*) malloc (sizeof(float)*matrix->rows*matrix->columns);
 
 	return matrix;
 }
@@ -171,9 +161,9 @@ T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2){
 	    		sum=0;
 
 	    		for(k=0;k<m1->columns;k++)
-	    			sum=sum + m1->values[row1][k] * m2->values[k][column2];
+	    			sum=sum + m1->values[(row1*m1->columns) + k] * m2->values[(k *m2->columns) + column2];
 
-	    		matrix->values[row1][column2]=sum;
+	    		matrix->values[(row1*m2->columns) + column2]=sum;
 	    	}
 	    }
 

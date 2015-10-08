@@ -17,7 +17,7 @@
 typedef struct {
 	int rows;
 	int columns;
-	float** values;
+	float* values;
 } T_Matrix;
 
 int doX(char *filename);
