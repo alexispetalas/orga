@@ -27,5 +27,6 @@ void liberarMatriz(T_Matrix* matrix);
 T_Matrix* deserializeMatrix(const char* linea, int num_linea);
 T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2);
 T_Matrix* nuevaMatriz(int rows, int columns);
+void multiplicarMatrices(int columnasM1, int columnasM2, int filasM1, int filasM2, float* valoresM1, float* valoresM2, float* valoresNuevos);
 
 #endif
