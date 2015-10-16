@@ -150,7 +150,7 @@ T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2){
 		/** Creo matriz y aloco su memoria **/
 		matrix = nuevaMatriz(m1->rows, m2->columns);
 
-		multiplicarMatrices(m1->columns, m2->columns, m1->rows, m2->rows, m1->values, m2->values, matrix->values);
+		multiplicarMatrices(m1->rows, m1->columns, m2->rows, m2->columns, m1->values, m2->values, matrix->values);
 
 	}else{
     	fprintf(stderr, "Las propiedades de multiplicación de matrices no estan satisfechas.\n");
@@ -161,7 +161,7 @@ T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2){
 
 }
 
-void multiplicarMatrices(int columnasM1, int columnasM2, int filasM1, int filasM2, float* valoresM1, float* valoresM2, float* valoresNuevos) {
+void multiplicarMatrices(int filasM1, int columnasM1, int filasM2, int columnasM2, float* valoresM1, float* valoresM2, float* valoresMR) {
 	
 	int row1, column2,  k;
 	float sum;
@@ -175,7 +175,7 @@ void multiplicarMatrices(int columnasM1, int columnasM2, int filasM1, int filasM
 	    	for(k=0;k<columnasM1;k++)
 	    		sum=sum + valoresM1[(row1*columnasM1) + k] * valoresM2[(k *columnasM2) + column2];
 	    	
-	    	valoresNuevos[(row1*columnasM2) + column2]=sum;
+	    	valoresMR[(row1*columnasM2) + column2]=sum;
 	    }
 	}
 }

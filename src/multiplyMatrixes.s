@@ -11,7 +11,7 @@
 #define ROW_MAT_2 40 
 #define VAL_MAT_1 44
 #define VAL_MAT_2 48   
-#define VAL_MAT_NEW 52    
+#define VAL_MAT_RES 52    
 
 .text
 .align 2
@@ -34,13 +34,13 @@ multiplyMatrixes:
         move    $fp, sp
         
         #Guado los argumentos
-        sw      a0, COL_MAT_1(sp)
-        sw      a1, COL_MAT_2(sp)
-        sw      a2, ROW_MAT_1(sp)
-        sw      a3, ROW_MAT_2(sp)
-        sw      a4, VAL_MAT_1(sp)
-        sw      a5, VAL_MAT_2(sp)
-        sw      a6, VAL_MAT_NEW(sp)
+        sw      a0, COL_MAT_1(sp)       ; FilasM1
+        sw      a1, COL_MAT_2(sp)       ; ColumnasM1
+        sw      a2, ROW_MAT_1(sp)       ; FilasM2
+        sw      a3, ROW_MAT_2(sp)       ; ColumnasM2
+        sw      a4, VAL_MAT_1(sp)       ; ValuesM1
+        sw      a5, VAL_MAT_2(sp)       ; ValuesM2
+        sw      a6, VAL_MAT_RES(sp)     ; ValuesMR
 
         lw a0, PTO_MAT_1
         lw , strlen
