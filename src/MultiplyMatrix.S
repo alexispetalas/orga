@@ -16,7 +16,7 @@
 #define ROW1 12
 #define COL2 8
 #define K 4
-#define SUM 0
+#define SUM 0 
 
 .text
 .align 2
@@ -38,19 +38,19 @@ multiplyMatrixes:
         sw fp, FP(sp)
         move fp, sp
         
-        #Guado los argumentos
+        #Guardo los argumentos
         sw a0, ROW_MAT_1(fp)       # FilasM1
         sw a1, COL_MAT_1(fp)       # ColumnasM1
         sw a2, ROW_MAT_2(fp)       # FilasM2
         sw a3, COL_MAT_2(fp)       # ColumnasM2
-        sw t7, VAL_MAT_1(fp)       # ValuesM1
-        sw t8, VAL_MAT_2(fp)       # ValuesM2
-        sw t9, VAL_MAT_RES(fp)     # ValuesMR
+    	#    sw t7, VAL_MAT_1(fp)       # ValuesM1
+   	#    sw t8, VAL_MAT_2(fp)       # ValuesM2
+  	#    sw t9, VAL_MAT_RES(fp)     # ValuesMR
 
 		sw zero, ROW1(fp)			# row1 = 0
 		lw t0, ROW_MAT_1(fp)		# t0 = filasM1
 		lw t1, ROW1(fp)			# t1 = row1
-
+		
 FOR_ROWS:								# for(row1=0# row1<filasM1# ++row1)
 		beq 	t1, t0, EXIT_FOR_ROWS 	# if row1 == filas1 we are done
 		sw		zero, COL2(fp)			# col2 = 0
@@ -64,17 +64,18 @@ FOR_COLS:
 		sw		zero, K(fp) 			# k=0
 		lw		t4, COL_MAT_1(fp)		# t4 = ColumnasM1
 		lw		t5, K(fp)				# t5 = k
+		#j EXIT_FOR_SUM
 FOR_SUM:
 		beq		t5, t4, EXIT_FOR_SUM	# for(k=0# k<columnasM1# k++)
 		#valoresM1[(row1*columnasM1) + k]
-		addu	t6, fp, VAL_MAT_1 		# valoresM1
+		lw	t6, VAL_MAT_1(fp )		# valoresM1
 		mul		t7, t1, t4				# t7 = row1*columnasM1
 		addu	t7, t7, t5				# t7 = (row1*columnasM1) + k
 		sll		t7, t7, 2				# Aligned t7 * 4
 		addu	t6, t6, t7				# valoresM1[(row1*columnasM1) + k]
 		l.s   	$f0, 0(t6)				# f0 = valoresM1[(row1*columnasM1) + k]
 		#valoresM2[(k *columnasM2) + column2]
-		addu	t6, fp, VAL_MAT_2		# valoresM2
+		lw	t6, VAL_MAT_2(fp)			# valoresM2
 		mul		t7, t5, t2				# t7 = k *columnasM2
 		addu	t7, t7, t3				# (k *columnasM2) + column2
 		sll		t7, t7, 2				# Aligned t7 * 4
@@ -84,20 +85,19 @@ FOR_SUM:
 		mul.s	$f6, $f0, $f2				# valoresM1[(row1*columnasM1) + k] * valoresM2[(k *columnasM2) + column2]
 		add.s	$f4, $f4, $f6				# sum=sum + valoresM1[(row1*columnasM1) + k] * valoresM2[(k *columnasM2) + column2]#
 		s.s		$f4, SUM(fp)				#
-
 		addi 	t5, t5, 1 				# add 1 to t5 (k)
 		j FOR_SUM						# jump back to the top
 
 EXIT_FOR_SUM:
 		#valoresMR[(row1*columnasM2) + column2]=sum#
-		addu	t6, fp, VAL_MAT_RES		# valoresMR
+		lw    t6, VAL_MAT_RES(fp)
+		#addu	t6, fp, VAL_MAT_RES		# valoresMR
 		mul		t7, t1, t2				# t7 = row1*columnasM2
 		addu	t7, t7, t3				# t7 = (row1*columnasM2) + column2
 		sll		t7, t7, 2				# Aligned t7 * 4
 		addu	t6, t6, t7				# t6 = valoresMR[(row1*columnasM2) + column2]
 		l.s		$f4, SUM(fp)				# f4 = sum
 		s.s		$f4, 0(t6)					# valoresMR[(row1*columnasM2) + column2] = sum
-
 		addi 	t3, t3, 1 				# add 1 to t3 (column2)
 		j FOR_COLS						# jump back to the top
 
@@ -115,4 +115,4 @@ EXIT_FOR_ROWS:
 
 .end multiplyMatrixes
 
-#.data
+
