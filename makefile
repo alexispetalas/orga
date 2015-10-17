@@ -1,9 +1,11 @@
 DEPS = \
        src/argParser.h \
+       src/MultiplyMatrix.h \
        src/Matrix.h \
        src/tp0.h
 
 OBJ = build/obj/argParser.o \
+	  build/obj/MultiplyMatrix.o \
       build/obj/Matrix.o \
       build/obj/tp0.o
 
@@ -20,6 +22,9 @@ tp0: $(OBJ)
 
 build/obj/argParser.o: src/argParser.c $(DEPS)
 	$(CC) -c -o $@ src/argParser.c $(CFLAGS)
+
+build/obj/MultiplyMatrix.o: src/MultiplyMatrix.S $(DEPS)
+	$(CC) -c -o $@ src/MultiplyMatrix.S $(CFLAGS)
 
 build/obj/Matrix.o: src/Matrix.c $(DEPS)
 	$(CC) -c -o $@ src/Matrix.c $(CFLAGS)

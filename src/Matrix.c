@@ -1,5 +1,5 @@
 #include "Matrix.h"
-
+#include "MultiplyMatrix.h"
 #define BUF_SIZE 255
 
 int leerEntradaEstandard()
@@ -150,7 +150,7 @@ T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2){
 		/** Creo matriz y aloco su memoria **/
 		matrix = nuevaMatriz(m1->rows, m2->columns);
 
-		multiplicarMatrices(m1->rows, m1->columns, m2->rows, m2->columns, m1->values, m2->values, matrix->values);
+		multiplyMatrixes(m1->rows, m1->columns, m2->rows, m2->columns, m1->values, m2->values, matrix->values);
 
 	}else{
     	fprintf(stderr, "Las propiedades de multiplicación de matrices no estan satisfechas.\n");
@@ -161,22 +161,5 @@ T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2){
 
 }
 
-void multiplicarMatrices(int filasM1, int columnasM1, int filasM2, int columnasM2, float* valoresM1, float* valoresM2, float* valoresMR) {
-	
-	int row1, column2,  k;
-	float sum;
 
-	for(row1=0; row1<filasM1; ++row1) //filas de la primer matriz
-	{
-	    for(column2=0; column2<columnasM2; ++column2)  //columnas de la segunda matriz
-	    {
-	    	sum=0;
-
-	    	for(k=0;k<columnasM1;k++)
-	    		sum=sum + valoresM1[(row1*columnasM1) + k] * valoresM2[(k *columnasM2) + column2];
-	    	
-	    	valoresMR[(row1*columnasM2) + column2]=sum;
-	    }
-	}
-}
 

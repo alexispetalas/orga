@@ -22,11 +22,12 @@ typedef struct {
 
 int doX(char *filename);
 int leerEntradaEstandard();
+
 void imprimirMatriz(T_Matrix* matrix);
 void liberarMatriz(T_Matrix* matrix);
+
 T_Matrix* deserializeMatrix(const char* linea, int num_linea);
 T_Matrix* procesarMatrices(T_Matrix* m1, T_Matrix* m2);
 T_Matrix* nuevaMatriz(int rows, int columns);
-void multiplicarMatrices(int filasM1, int columnasM1, int filasM2, int columnasM2, float* valoresM1, float* valoresM2, float* valoresMR);
 
 #endif
