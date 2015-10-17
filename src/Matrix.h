@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
+#include <ctype.h>
 
 #ifndef MATRIX_H
 #define MATRIX_H
@@ -22,7 +23,7 @@ typedef struct {
 
 int doX(char *filename);
 int leerEntradaEstandard();
-
+int isDigit(char* str);
 void imprimirMatriz(T_Matrix* matrix);
 void liberarMatriz(T_Matrix* matrix);
 

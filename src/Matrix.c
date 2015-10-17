@@ -75,6 +75,21 @@ char* serializeMatrix(T_Matrix* m ){
     return matrix_str;
 }
 
+int isDigit(char* str){
+	int i,res = EXITO, len = strlen(str);
+
+	for(i=0; i < len; ++i)
+	{
+		if(isalpha(str[i]))
+		{
+			res = ERROR;
+			break;
+		}
+	}
+
+	return res;
+}
+
 T_Matrix* deserializeMatrix(const char* linea, int num_linea){
 
 	int rows = -1;
@@ -105,14 +120,21 @@ T_Matrix* deserializeMatrix(const char* linea, int num_linea){
     int f=0, c=0;
     while( (token != NULL) && (f < rows ) )
     {
-    	matrix->values[(f*columns)+c] = atof(token);
-    	token = strtok(NULL, " ");
-    	if(f < rows){
-    		c++;
-    		if(c == columns){
-    			f++;
-    			c = 0;
+    	if( isDigit(token) == EXITO){
+    		matrix->values[(f*columns)+c] = atof(token);
+    		token = strtok(NULL, " ");
+    		if(f < rows){
+    			c++;
+    			if(c == columns){
+    				f++;
+    				c = 0;
+    			}
     		}
+    	}
+    	else{
+        	fprintf(stderr, "Valores invalidos en la matriz de %dx%d de la linea %d.\n", matrix->rows, matrix->columns, num_linea );
+        	liberarMatriz(matrix);
+        	exit(1);
     	}
     }
     
