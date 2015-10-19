@@ -15,9 +15,9 @@ CC=gcc
 CP=cp
 CFLAGS=-I./src -Wall $(ACFLAGS)
 
-build: prepare tp0
+build: prepare tp1
 
-tp0: $(OBJ)
+tp1: $(OBJ)
 	gcc -o build/$@ $(OBJ) $(CFLAGS)
 
 build/obj/argParser.o: src/argParser.c $(DEPS)

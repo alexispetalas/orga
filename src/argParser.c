@@ -1,17 +1,17 @@
-﻿#include "argParser.h"
+#include "argParser.h"
 
 int showMenuHelp()
 {
     printf("Usage:\n");
-    printf("  ./tp0 -h\n");
-    printf("  ./tp0 -V\n");
-    printf("  ./tp0  < in_file > out_file\n");
+    printf("  ./tp1 -h\n");
+    printf("  ./tp1 -V\n");
+    printf("  ./tp1  < in_file > out_file\n");
     printf("Options:\n");
     printf("  -V, --version\tPrint version and quit.\n");
     printf("  -h, --help\tPrint this information and quit.\n");
     printf("Examples:\n");
-    printf("  ./tp0 < in.txt > out.txt\n");
-    printf("  cat in.txt | ./tp0 > out.txt\n");
+    printf("  ./tp1 < in.txt > out.txt\n");
+    printf("  cat in.txt | ./tp1 > out.txt\n");
     return EXITO;
 }
 
