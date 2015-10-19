@@ -1,4 +1,4 @@
-#include "argParser.h"
+﻿#include "argParser.h"
 
 int showMenuHelp()
 {
@@ -17,13 +17,12 @@ int showMenuHelp()
 
 int showMenuVersion()
 {
-	printf("\n\tTP0 - Infraestructura Básica\n");
+	printf("\n\tTP1 - 1: assembly MIPS\n");
 	printf("  (66.20) Organización de las Computadoras\n");
  	printf("------------------------------------------------\n");
 	printf("\t2do Cuatrimestre de 2015\n");
 	printf("\t      Versión: 1.0\n");
 	printf("\nAutores:\n");
-	printf("         Petalás, Alexis - 86742\n");
 	printf("         Opromolla, Giovanni - 87761\n");
 	printf("         Tapia, Jimena Soledad - 88392\n\n");
 	return EXITO;
