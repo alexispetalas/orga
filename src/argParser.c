@@ -17,7 +17,7 @@ int showMenuHelp()
 
 int showMenuVersion()
 {
-	printf("\n\tTP1 - 1: assembly MIPS\n");
+	printf("\n\tTP1 - assembly MIPS\n");
 	printf("  (66.20) Organización de las Computadoras\n");
  	printf("------------------------------------------------\n");
 	printf("\t2do Cuatrimestre de 2015\n");
