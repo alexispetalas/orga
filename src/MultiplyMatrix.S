@@ -1,18 +1,18 @@
 #include <mips/regdef.h>
 #include <sys/syscall.h>
 
-#define SF 28
-#define FP 24
-#define GP 20
+#define SF 24
+#define FP 20
+#define GP 16
 #define fp $30
 
-#define COL_MAT_1 28
-#define COL_MAT_2 32 
-#define ROW_MAT_1 36
-#define ROW_MAT_2 40 
-#define VAL_MAT_1 44
-#define VAL_MAT_2 48   
-#define VAL_MAT_RES 52    
+#define COL_MAT_1 24
+#define COL_MAT_2 28
+#define ROW_MAT_1 32
+#define ROW_MAT_2 36
+#define VAL_MAT_1 40
+#define VAL_MAT_2 44
+#define VAL_MAT_RES 48  
 #define ROW1 12
 #define COL2 8
 #define K 4
