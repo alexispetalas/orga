@@ -1,4 +1,4 @@
-Pasos para correr en la virtual:
+﻿Pasos para correr en la virtual:
 $ make virtual-start
 login: root
 pass: orga6620
@@ -13,7 +13,7 @@ $ cd deploy/
 $ make build
 Ahi se les compila todo en MIPS... 
 
-el ejecutable se genera en ~/deploy/build/tp0
+el ejecutable se genera en ~/deploy/build/tp1
 los archivos para correr están bajo la carpeta de data/
 
-Ejemplo de corrida: ~/deploy/$ build/tp0 < data/in1.txt
+Ejemplo de corrida: ~/deploy/$ build/tp1 < data/in1.txt
